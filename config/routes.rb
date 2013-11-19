@@ -3,7 +3,6 @@ Hork::Application.routes.draw do
 
   resources :pets
 
-  get "homepage/index"
   root 'tasks#index'
 
   get 'tasks/toggle/:id', to: 'tasks#toggle'
