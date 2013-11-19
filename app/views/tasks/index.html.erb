@@ -1,0 +1,35 @@
+<% if Task.find(:all).size > 0 %>
+
+  <% @tasks.each do |task| %>
+    <div class="task <%= cycle('alt1', 'alt2') %>">
+      <table>
+        <tr>
+          <td style="width:8%;text-align:center;"><input type="checkbox" class="task_cb" name="task[]" id="<%= task.id %>" onclick="location.href='/tasks/toggle/<%= task.id %>';" /></td>
+          <td style="width:70%;"><span class="task_text"><%= link_to "#{task.task}", task  %></span></td>
+          <td>
+            <% if task.completed? %>
+              <span style="color:darkgreen;">complete</span>
+            <% else %>
+              <span style="color:darkred;">incomplete</span>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+
+<!--
+      <tr>
+        <td><%= task.task %></td>
+        <td><%= task.completed %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+-->
+    </div>
+  <% end %>
+  <div style="margin:1em;"><%= link_to 'Add a new task', new_task_path %></div>
+
+<br>
+<% else %>
+  Ruh-Roh -- looks like you haven't entered any tasks yet.  <%= link_to 'Fix that now', new_task_path %>.
+<% end %>
